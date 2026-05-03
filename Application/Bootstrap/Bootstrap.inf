@@ -1,0 +1,36 @@
+## @file
+#  Bootstrap for Sn0wSeven
+#
+#  Copyright (c) 2026, ilikesn0w. All rights reserved.
+#  SPDX-License-Identifier: BSD-3-Clause
+##
+
+[Defines]
+  INF_VERSION     = 0x0001001B
+  BASE_NAME       = Bootstrap
+  FILE_GUID       = DED1A262-45A0-49B4-BB1D-EAA16E858190
+  VERSION_STRING  = 1.0
+  MODULE_TYPE     = UEFI_APPLICATION
+  ENTRY_POINT     = UefiMain
+
+[Sources]
+  Bootstrap.c
+
+[Packages]
+  Sn0wSevenPkg/Sn0wSevenPkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+
+[Protocols]
+  gEfiDevicePathProtocolGuid
+  gEfiLoadedImageProtocolGuid
+
+[LibraryClasses]
+  UefiLib
+  BaseMemoryLib
+  DebugLib
+  DevicePathLib
+  MemoryAllocationLib
+  UefiApplicationEntryPoint
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib

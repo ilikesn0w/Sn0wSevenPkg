@@ -1,0 +1,54 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        build_type: [DEBUG, RELEASE]
+        arch: [X64]
+
+    env:
+      TOOLCHAIN: GCC
+      DSC_PATH: Sn0wSevenPkg/Sn0wSevenPkg.dsc
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential git uuid-dev nasm iasl python3 python3-pip
+
+      - name: Clone edk2 and Sn0wSevenPkg
+        run: |
+          git clone https://github.com/tianocore/edk2.git -b edk2-stable202602
+          cd edk2
+          git submodule update --init --recommend-shallow
+          git clone https://github.com/ilikesn0w/Sn0wSevenPkg
+          . ./edksetup.sh
+          make -C BaseTools
+
+      - name: Build ReBDSDxe
+        run: |
+          cd edk2
+          . ./edksetup.sh
+          build -a ${{ matrix.arch }} -b ${{ matrix.build_type }} -t ${{ env.TOOLCHAIN }} -p ${{ env.DSC_PATH }}
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: ReBDSDxe-${{ matrix.arch }}-${{ env.TOOLCHAIN }}-${{ matrix.build_type }}
+          path: edk2/Build/Sn0wSevenPkg/${{ matrix.build_type }}_${{ env.TOOLCHAIN }}/

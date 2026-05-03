@@ -1,0 +1,15 @@
+## @file
+#  Bootloader for Windows 7 with pure UEFI support
+#
+#  Copyright (c) 2026, ilikesn0w. All rights reserved.
+#  SPDX-License-Identifier: BSD-3-Clause
+##
+
+[Defines]
+  DEC_SPECIFICATION = 0x0001001B
+  PACKAGE_NAME      = Sn0wSevenPkg
+  PACKAGE_GUID      = 08EA5118-4B16-43F4-AE20-B552157FC0DC
+  PACKAGE_VERSION   = 1.0
+
+[Includes]
+  Include
