@@ -34,7 +34,7 @@ jobs:
 
       - name: Clone edk2 and Sn0wSevenPkg
         run: |
-          git clone https://github.com/tianocore/edk2.git -b edk2-stable202602
+          git clone https://github.com/tianocore/edk2.git -b edk2-stable202605
           cd edk2
           git submodule update --init --recommend-shallow
           git clone https://github.com/ilikesn0w/Sn0wSevenPkg
