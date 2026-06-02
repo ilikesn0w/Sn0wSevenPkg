@@ -5,8 +5,7 @@
   SPDX-License-Identifier: BSD-3-Clause
 **/
 
-#ifndef SNW_VARIABLE_H
-#define SNW_VARIABLE_H
+#pragma once
 
 //
 // C8AD0BB7-E83A-47A8-8956-5858E8C98D33
@@ -20,5 +19,3 @@
 // SNW_VENDOR_VARIABLE_GUID
 //
 extern EFI_GUID gSnwVendorVariableGuid;
-
-#endif // SNW_VARIABLE_H
